@@ -1,0 +1,26 @@
+security:
+  basic:
+    enabled: false
+    
+server:
+  port: 5555
+  
+eureka:
+  instance:
+    preferIpAddress: true
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+zuul:
+  routes:
+    shoppingcartservice: /cart/**
+  ignored-services: '*'
+  prefix: /api
+
+logging:
+  level:
+    com.netflix: WARN
+    org.springframework.web: WARN
+    org.project: DEBUG
