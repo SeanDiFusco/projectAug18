@@ -15,17 +15,17 @@ public class Product {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	Long Id;
+	private Long Id;
 	
-	Long productId;
+	private Long productId;
 
-	String name;
+	private String name;
 	
 	@Column(columnDefinition = "text")
-	String description;
+	private String description;
 	
 	//customerId associated with the product
-	Long inShoppingCartId;
+	private Long inShoppingCartId;
 
 	public Long getId() {
 		return Id;

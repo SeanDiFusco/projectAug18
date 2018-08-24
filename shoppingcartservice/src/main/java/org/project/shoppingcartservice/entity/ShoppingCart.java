@@ -17,12 +17,12 @@ public class ShoppingCart {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	Long cartId;
+	private Long cartId;
 	
-	Long customerId;
+	private Long customerId;
 	
 	@OneToMany(mappedBy = "productId",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	List<Product> customerCartProductList;
+	private List<Product> customerCartProductList;
 
 	public Long getCartId() {
 		return cartId;
