@@ -18,9 +18,9 @@ import com.fasterxml.jackson.annotation.JsonView;
 
 @RestController
 @RequestMapping("/add-to-cart")
-public class ShoppingcartController {
+public class ShoppingcartPostController {
 	
-	private static final Logger logger = LoggerFactory.getLogger(ShoppingcartController.class);
+	private static final Logger logger = LoggerFactory.getLogger(ShoppingcartPostController.class);
 	
 	@Autowired
 	ShoppingCartService shoppingCartService;
@@ -32,6 +32,7 @@ public class ShoppingcartController {
 	public ShoppingCart addProductToCartByProductId(@PathVariable("customerId") Long customerId, @PathVariable("productId") Long productId) {
 
 		logger.debug("addProductToCartByProductId method called with customerId= "+customerId + " , productId = " + productId);
+		
 		Product tempProduct = productService.getProductById(productId);
 		System.out.println(tempProduct);
 		ShoppingCart addedCart = shoppingCartService.addProductByCustomerId(tempProduct, customerId);

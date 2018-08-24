@@ -1,6 +1,7 @@
 package org.project.shoppingcartservice.service.impl;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -23,10 +24,22 @@ public class ShoppingCartServiceImpl implements ShoppingCartService{
 
 	@Override
 	public ShoppingCart addProductByCustomerId(Product product, Long customerId) {
-		ShoppingCart temp = shoppingCartRepository.findByCustomerId(customerId);
-		temp.getCustomerCartProductList().add(product);
+		ShoppingCart temp = new ShoppingCart();
+		if(shoppingCartRepository.findByCustomerId(customerId) != null) {
+			temp = shoppingCartRepository.findByCustomerId(customerId);
+			product.setInShoppingCartId(customerId);
+			temp.getCustomerCartProductList().add(product);
+			shoppingCartRepository.delete(temp.getCartId());
+		}
+		else {
+			temp.setCustomerId(customerId);
+			List<Product> newList = new ArrayList<Product>();
+			newList.add(product);
+			temp.setCustomerCartProductList(newList);
+		}
 		shoppingCartRepository.save(temp);
-		return shoppingCartRepository.findByCustomerId(customerId);
+
+		return temp;
 	}
 
 	@Override
@@ -69,10 +82,10 @@ public class ShoppingCartServiceImpl implements ShoppingCartService{
 		ShoppingCart tempCart = findByCustomerId(shoppingCart.getCustomerId());
 		
 		if(tempCart != null) {
-			throw new IOException ("Shopping Cart was not found in database");
-		} else {
 			tempCart.setCustomerId(shoppingCart.getCustomerId());
 			tempCart.setCustomerCartProductList(shoppingCart.getCustomerCartProductList());
+		} else {
+			throw new IOException ("Shopping Cart was not found in database");
 		}
 		
 		return (ShoppingCart) shoppingCartRepository.save(tempCart);

@@ -21,8 +21,7 @@ public class ShoppingCart {
 	
 	Long customerId;
 	
-	@Column(name="product_list")
-	@OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "productId",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	List<Product> customerCartProductList;
 
 	public Long getCartId() {
@@ -56,5 +55,11 @@ public class ShoppingCart {
 		this.customerCartProductList = customerCartProductList;
 	}
 	
-	public ShoppingCart() {};
+	public ShoppingCart() {}
+
+	@Override
+	public String toString() {
+		return "ShoppingCart [cartId=" + cartId + ", customerId=" + customerId + ", customerCartProductList="
+				+ customerCartProductList + "]";
+	};
 }

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(value="/get-cart", method = RequestMethod.GET)
-public class ShoppingcartRequestController {
+public class ShoppingcartGetController {
 	
 	@Autowired
 	ShoppingCartService shoppingCartService;

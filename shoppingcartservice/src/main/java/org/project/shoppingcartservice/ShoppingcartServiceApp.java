@@ -51,6 +51,7 @@ public class ShoppingcartServiceApp implements CommandLineRunner
 
 	@Override
 	public void run(String... args) throws Exception {
+		/*
 		Product testProduct1 = new Product(1L, "test1", "test1 description");
 		Product testProduct2 = new Product(2L, "test2", "test2 description");
 		List<Product> testList = new ArrayList<Product>();
@@ -63,5 +64,6 @@ public class ShoppingcartServiceApp implements CommandLineRunner
 		testCart.setCustomerCartProductList(testList);
 
 		shoppingCartService.addAShoppingCart(testCart);
+		*/
 	}
 }

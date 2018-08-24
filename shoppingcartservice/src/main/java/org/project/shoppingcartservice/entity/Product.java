@@ -24,6 +24,9 @@ public class Product {
 	@Column(columnDefinition = "text")
 	String description;
 	
+	Long quantity;
+	
+	//customerId associated with the product
 	Long inShoppingCartId;
 
 	public Long getId() {
@@ -66,11 +69,26 @@ public class Product {
 		this.inShoppingCartId = inShoppingCartId;
 	}
 	
+	
+	public Long getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(Long quanitity) {
+		this.quantity = quantity;
+	}
+
 	public Product() {}
 	
 	public Product(Long productId, String name, String description) {
 		this.productId = productId;
 		this.name = name;
 		this.description = description;
+	}
+
+	@Override
+	public String toString() {
+		return "Product [Id=" + Id + ", productId=" + productId + ", name=" + name + ", description=" + description
+				+ ", quantity=" + quantity + ", inShoppingCartId=" + inShoppingCartId + "]";
 	}
 }
