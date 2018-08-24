@@ -25,6 +25,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService{
 	@Override
 	public ShoppingCart addProductByCustomerId(Product product, Long customerId) {
 		ShoppingCart temp = new ShoppingCart();
+		
 		if(shoppingCartRepository.findByCustomerId(customerId) != null) {
 			temp = shoppingCartRepository.findByCustomerId(customerId);
 			product.setInShoppingCartId(customerId);
@@ -34,6 +35,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService{
 		else {
 			temp.setCustomerId(customerId);
 			List<Product> newList = new ArrayList<Product>();
+			product.setInShoppingCartId(customerId);
 			newList.add(product);
 			temp.setCustomerCartProductList(newList);
 		}

@@ -24,8 +24,6 @@ public class Product {
 	
 	@Column(columnDefinition = "text")
 	String description;
-	
-	private Long quantity;
 
 
 	public Long getId() {
@@ -60,20 +58,11 @@ public class Product {
 		this.description = description;
 	}
 	
-	public Long getQuantity() {
-		return quantity;
-	}
-
-	public void setQuantity(Long quanitity) {
-		this.quantity = quantity;
-	}
-	
 	public Product() {}
 	
 	public Product(Long productId, String name, String description, Long quantity) {
 		this.productId = productId;
 		this.name = name;
 		this.description = description;
-		this.quantity = quantity;
 	}
 }
