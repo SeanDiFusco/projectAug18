@@ -31,6 +31,7 @@
     <module>zuulserver</module>
     <module>shoppingcartservice</module>
     <module>productservice</module>
+    <module>priceservice</module>
   </modules>
 
 	<dependencies>

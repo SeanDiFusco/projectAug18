@@ -21,7 +21,7 @@ public class ShoppingCart {
 	
 	private Long customerId;
 	
-	@OneToMany(mappedBy = "productId",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "id",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private List<Product> customerCartProductList;
 
 	public Long getCartId() {
