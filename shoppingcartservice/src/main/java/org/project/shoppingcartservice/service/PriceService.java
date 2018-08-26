@@ -6,5 +6,5 @@ import org.project.shoppingcartservice.entity.Product;
 
 public interface PriceService {
 	List<Product> getPricesForCustomerCartList(List<Product> customerCartProductList);
-	float getPriceForSingleProduct(Long productId);
+	Float getPriceForSingleProduct(Long productId);
 }

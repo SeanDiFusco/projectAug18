@@ -26,7 +26,7 @@ public class PriceServiceImpl implements PriceService{
 	}
 
 	@Override
-	public float findPriceByProductId(Long productId) {
+	public Float findPriceByProductId(Long productId) {
 		Product requestedProduct = priceRepository.findProductByProductId(productId);
 		return requestedProduct.getPrice();
 	}

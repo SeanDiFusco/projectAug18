@@ -27,7 +27,7 @@ public class Product {
 	//customerId associated with the product
 	private Long inShoppingCartId;
 	
-	private float price;
+	private Float price;
 
 	public Long getId() {
 		return id;
@@ -73,7 +73,7 @@ public class Product {
 		return price;
 	}
 
-	public void setPrice(float price) {
+	public void setPrice(Float price) {
 		this.price = price;
 	}
 

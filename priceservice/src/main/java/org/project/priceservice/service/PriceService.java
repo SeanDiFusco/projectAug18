@@ -6,5 +6,5 @@ import org.project.priceservice.entity.Product;
 
 public interface PriceService {
 	List<Product> getPricesByList(List<Product> productList);
-	float findPriceByProductId(Long productId);
+	Float findPriceByProductId(Long productId);
 }

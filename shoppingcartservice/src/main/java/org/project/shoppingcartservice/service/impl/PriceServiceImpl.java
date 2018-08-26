@@ -21,7 +21,7 @@ public class PriceServiceImpl implements PriceService{
 	public List<Product> getPricesForCustomerCartList(List<Product> customerCartProductList) {
 		
 		for(Product product : customerCartProductList) {
-			float price = getPriceForSingleProduct(product.getProductId());
+			Float price = getPriceForSingleProduct(product.getProductId());
 			product.setPrice(price);
 		}
 		
@@ -32,7 +32,7 @@ public class PriceServiceImpl implements PriceService{
 	}
 
 	@Override
-	public float getPriceForSingleProduct(Long productId) {
+	public Float getPriceForSingleProduct(Long productId) {
 		return priceServiceFeignClient.getPriceForSingleProduct(productId);
 	}
 }
