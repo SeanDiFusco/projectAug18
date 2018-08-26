@@ -15,7 +15,7 @@ public class ShoppingcartGetController {
 	@Autowired
 	ShoppingCartService shoppingCartService;
 
-	@RequestMapping(value="/user/{customerId}", method = RequestMethod.GET)
+	@RequestMapping(value="/customer/{customerId}", method = RequestMethod.GET)
 	public ShoppingCart getCartByUserId(@PathVariable("customerId") Long customerId) {
 		System.out.println("getting shoppingcart for customerId " + customerId);
 		

@@ -12,7 +12,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @FeignClient("priceservice")
 public interface PriceServiceFeignClient {
 
-	@RequestMapping(value="/price-to-productlist", method = RequestMethod.POST, consumes="application/json")
+	@RequestMapping(value="/prices/cart", method = RequestMethod.POST, consumes = "application/json")
 	ArrayList<Product> getPriceForProductList(@RequestBody List<Product> userShoppingCartProductList);
+	
+	@RequestMapping(value="/prices/product/{productId}", method = RequestMethod.GET, consumes = "application/json")
+	float getPriceForSingleProduct(@PathVariable("productId") Long productId);
 }
 

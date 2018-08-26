@@ -1,4 +1,4 @@
-package org.project.productservice.entity;
+package org.project.priceservice.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -24,7 +24,7 @@ public class Product {
 	
 	@Column(columnDefinition = "text")
 	private String description;
-
+	
 	private float price;
 	
 	public float getPrice() {
@@ -34,6 +34,8 @@ public class Product {
 	public void setPrice(float price) {
 		this.price = price;
 	}
+
+
 
 	public Long getId() {
 		return id;
@@ -67,9 +69,10 @@ public class Product {
 		this.description = description;
 	}
 	
+
 	public Product() {}
 	
-	public Product(Long productId, String name, String description) {
+	public Product(Long productId, String name, String description, Long quantity) {
 		this.productId = productId;
 		this.name = name;
 		this.description = description;

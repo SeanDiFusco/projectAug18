@@ -8,6 +8,7 @@ import java.util.List;
 import org.project.shoppingcartservice.entity.Product;
 import org.project.shoppingcartservice.entity.ShoppingCart;
 import org.project.shoppingcartservice.repository.ShoppingCartRepository;
+import org.project.shoppingcartservice.service.PriceService;
 import org.project.shoppingcartservice.service.ShoppingCartService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,6 +19,9 @@ import org.springframework.stereotype.Service;
 public class ShoppingCartServiceImpl implements ShoppingCartService{
 	
 	private static final Logger LOG = LoggerFactory.getLogger(ShoppingCartServiceImpl.class);
+	
+	@Autowired
+	PriceService priceService;
 	
 	@Autowired
 	ShoppingCartRepository shoppingCartRepository;
@@ -52,12 +56,19 @@ public class ShoppingCartServiceImpl implements ShoppingCartService{
 
 	@Override
 	public ShoppingCart findByCustomerId(Long customerId) {
-		return shoppingCartRepository.findByCustomerId(customerId);
+		ShoppingCart cart = shoppingCartRepository.findByCustomerId(customerId);
+		List<Product> cartList = cart.getCustomerCartProductList();
+		List<Product> updatedCartList = priceService.getPricesForCustomerCartList(cartList);
+		cart.setCustomerCartProductList(updatedCartList);
+		return cart;
 	}
 
 	@Override
 	public ShoppingCart findShoppingCartByCartId(Long id) {
-		return shoppingCartRepository.findOne(id);
+		System.out.println("Finding shopping car by cartId : "+id);
+		ShoppingCart requestCart = shoppingCartRepository.findOne(id);
+		System.out.println("RequestCart productlist is : "+ requestCart.getCustomerCartProductList().toString());
+		return requestCart;
 	}
 
 	public ShoppingCart addAShoppingCart(ShoppingCart cart) {

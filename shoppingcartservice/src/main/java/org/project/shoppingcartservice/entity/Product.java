@@ -15,7 +15,7 @@ public class Product {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long Id;
+	private Long id;
 	
 	private Long productId;
 
@@ -26,13 +26,15 @@ public class Product {
 	
 	//customerId associated with the product
 	private Long inShoppingCartId;
+	
+	private float price;
 
 	public Long getId() {
-		return Id;
+		return id;
 	}
 
 	public void setId(Long id) {
-		Id = id;
+		id = id;
 	}
 
 	public Long getProductId() {
@@ -67,6 +69,15 @@ public class Product {
 		this.inShoppingCartId = inShoppingCartId;
 	}
 	
+	public float getPrice() {
+		return price;
+	}
+
+	public void setPrice(float price) {
+		this.price = price;
+	}
+
+	
 	
 	public Product() {}
 	
@@ -78,7 +89,7 @@ public class Product {
 
 	@Override
 	public String toString() {
-		return "Product [Id=" + Id + ", productId=" + productId + ", name=" + name + ", description=" + description
+		return "Product [id=" + id + ", productId=" + productId + ", name=" + name + ", description=" + description
 				+ ", inShoppingCartId=" + inShoppingCartId + "]";
 	}
 }

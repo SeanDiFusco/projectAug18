@@ -1,5 +1,7 @@
 package org.project.shoppingcartservice.controller;
 
+import java.util.List;
+
 import org.project.shoppingcartservice.entity.Product;
 import org.project.shoppingcartservice.entity.ShoppingCart;
 import org.project.shoppingcartservice.service.ProductService;
@@ -38,6 +40,14 @@ public class ShoppingcartPostController {
 		ShoppingCart addedCart = shoppingCartService.addProductByCustomerId(tempProduct, customerId);
 		System.out.println(addedCart);
 		return addedCart;
+	}
+	
+	@RequestMapping(value = "/prices", method = RequestMethod.POST)
+	public List<Product> addPricesToCartAndRespond(@RequestBody List<Product> productListWithPrices ) {
+
+		logger.debug("addPricesToCartAndRespond method called with" + productListWithPrices);
+		
+		return productListWithPrices;
 	}
 	
 }
