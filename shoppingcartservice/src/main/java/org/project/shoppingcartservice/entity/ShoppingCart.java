@@ -17,20 +17,15 @@ public class ShoppingCart {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long cartId;
+	private Long id;
 	
+	@Column(unique=true)
 	private Long customerId;
 	
-	@OneToMany(mappedBy = "id",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "id",cascade=CascadeType.ALL, fetch = FetchType.EAGER)
 	private List<Product> customerCartProductList;
 
-	public Long getCartId() {
-		return cartId;
-	}
-
-	public void setCartId(Long cartId) {
-		this.cartId = cartId;
-	}
+	private Float totalPrice;
 
 	public Long getCustomerId() {
 		return customerId;
@@ -48,9 +43,16 @@ public class ShoppingCart {
 		this.customerCartProductList = customerCartProductList;
 	}
 
+	public Float getTotalPrice() {
+		return totalPrice;
+	}
+
+	public void setTotalPrice(Float totalPrice) {
+		this.totalPrice = totalPrice;
+	}
+
 	public ShoppingCart(Long cartId, Long customerId, List<Product> customerCartProductList) {
 		super();
-		this.cartId = cartId;
 		this.customerId = customerId;
 		this.customerCartProductList = customerCartProductList;
 	}
@@ -59,7 +61,7 @@ public class ShoppingCart {
 
 	@Override
 	public String toString() {
-		return "ShoppingCart [cartId=" + cartId + ", customerId=" + customerId + ", customerCartProductList="
+		return "ShoppingCart [customerId=" + customerId + ", customerCartProductList="
 				+ customerCartProductList + "]";
 	};
 }

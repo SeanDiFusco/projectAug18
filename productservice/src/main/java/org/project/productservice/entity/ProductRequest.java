@@ -1,4 +1,4 @@
-package org.project.shoppingcartservice.entity;
+package org.project.productservice.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -7,28 +7,31 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-@Entity
-public class Product {
+public class ProductRequest {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+
 	private Long id;
 	
 	private Long productId;
 
 	private String name;
 	
-	@Column(columnDefinition = "text")
+
 	private String description;
 	
 	//customerId associated with the product
+	//not needed when dealing with productdb
+
 	private Long inCartOfCustomerId;
 	
+
 	private Float price;
 	
+	//To keep track of stock levels
 	private int quantity;
 
 	public Long getId() {
@@ -87,24 +90,18 @@ public class Product {
 		this.quantity = quantity;
 	}
 
-	public Product() {}
+	public ProductRequest() {}
 	
-	public Product(Long productId, String name, String description) {
-		this.productId = productId;
-		this.name = name;
-		this.description = description;
-	}
-	
-	public Product(Long id,Long productId, String name, String description) {
-		this.id=id;
+	public ProductRequest(Long productId, String name, String description) {
 		this.productId = productId;
 		this.name = name;
 		this.description = description;
 	}
 
+
 	@Override
 	public String toString() {
-		return "Product [id=" + id + ", productId=" + productId + ", name=" + name + ", description=" + description
+		return "ProductRequest [id=" + id + ", productId=" + productId + ", name=" + name + ", description=" + description
 				+ ",quantity " + quantity + ", inCartOfCustomerId=" + inCartOfCustomerId + "]";
 	}
 }

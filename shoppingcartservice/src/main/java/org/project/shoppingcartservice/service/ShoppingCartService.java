@@ -7,12 +7,16 @@ import org.project.shoppingcartservice.entity.Product;
 import org.project.shoppingcartservice.entity.ShoppingCart;
 
 public interface ShoppingCartService {
-	ShoppingCart findByCustomerId(Long customerId);
-	
-	ShoppingCart addProductByCustomerId(Product product, Long customerId);
 	List<ShoppingCart> findAll();
-	ShoppingCart findShoppingCartByCartId(Long id);
-	ShoppingCart updateShoppingCart(ShoppingCart shoppingCart) throws IOException;
-	void deleteItemById(Long id);
+	ShoppingCart findCartByCustomerId(Long customerId) throws IOException;
+	
+	//CartId being removed (legacy code)
+	//ShoppingCart findShoppingCartByCartId(Long id);
+	
+	ShoppingCart addProductByCustomerId(Product product, Long customerId, int quantity);
 	ShoppingCart addAShoppingCart(ShoppingCart cart);
+
+	ShoppingCart updateShoppingCart(ShoppingCart shoppingCart) throws IOException;
+	ShoppingCart deleteItemByProductIdAndCustomerId(Long customerId, Long productId) throws IOException;
+	Long deleteCartByCustomerId(Long customerId);
 }

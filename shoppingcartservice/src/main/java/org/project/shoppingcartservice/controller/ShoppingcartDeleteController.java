@@ -6,6 +6,8 @@ import java.util.List;
 import org.project.shoppingcartservice.entity.Product;
 import org.project.shoppingcartservice.entity.ShoppingCart;
 import org.project.shoppingcartservice.service.ShoppingCartService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,34 +18,39 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping(value="/delete", method = RequestMethod.DELETE)
 public class ShoppingcartDeleteController {
 	
+	private static final Logger LOG = LoggerFactory.getLogger(ShoppingcartDeleteController.class);
+	
 	@Autowired 
 	ShoppingCartService shoppingCartService;
 
 	@RequestMapping(value = "/customer/{customerId}/product/{productId}",method = RequestMethod.DELETE)
-	public ShoppingCart deleteProductFromCustomerCartbyProductId(@PathVariable("customerId")Long customerId, @PathVariable("productId") Long productId){
+	public ShoppingCart deleteProductFromCustomerCartbyProductId(@PathVariable("customerId")Long customerId, @PathVariable("productId") Long productId) throws IOException{
 		
-		//get customer cart
-		ShoppingCart tempCart = shoppingCartService.findByCustomerId(customerId);
-		List<Product> tempList = tempCart.getCustomerCartProductList();
-		int tempListSize = tempList.size();
-		
-		//delete product from list
-		for(int i=0; i< tempListSize; i++){
-			Long currentProductId = tempList.get(i).getProductId();
-			if(currentProductId == productId) {
-				tempList.remove(i);
-			}
+		if(shoppingCartService.findCartByCustomerId(customerId) != null) {
+			
+			return shoppingCartService.deleteItemByProductIdAndCustomerId(customerId, productId);
+			
+		} else {
+			
+			LOG.error("ShoppingCart for customerId {} not found",customerId);
+			throw new IOException ("Shopping Cart was not found in database") ;
 		}
-		//save updated list
-		tempCart.setCustomerCartProductList(tempList);
+	}
+	
+	@RequestMapping(value = "/customer/{customerId}",method = RequestMethod.DELETE)
+	public Long deleteCartByCustomerId(@PathVariable("customerId")Long customerId) throws IOException{
 		
-		try {
-			shoppingCartService.updateShoppingCart(tempCart);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		if(shoppingCartService.findCartByCustomerId(customerId) != null) {
+			
+			return shoppingCartService.deleteCartByCustomerId(customerId);
+			
+		} else {
+			
+			LOG.error("ShoppingCart for customerId {} not found",customerId);
+			throw new IOException ("Shopping Cart was not found in database") ;
 		}
-
-		return tempCart;
 	}
 }
+	
+	
+

@@ -24,6 +24,7 @@ public class ProductServiceApp implements CommandLineRunner
     
 	@Override
 	public void run(String... args) throws Exception {
+		/*
 		Product testProduct1 = new Product(1L, "test1", "test1 description");
 		System.out.println("Testproduct1 has productId "+ testProduct1.getProductId());
 		Product testProduct2 = new Product(2L, "test2", "test2 description");
@@ -32,5 +33,6 @@ public class ProductServiceApp implements CommandLineRunner
 
 		productService.addProduct(testProduct1);
 		productService.addProduct(testProduct2);
+		*/
 	}
 }

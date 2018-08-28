@@ -22,7 +22,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 @RequestMapping("/add-to-cart")
 public class ShoppingcartPostController {
 	
-	private static final Logger logger = LoggerFactory.getLogger(ShoppingcartPostController.class);
+	private static final Logger LOG = LoggerFactory.getLogger(ShoppingcartPostController.class);
 	
 	@Autowired
 	ShoppingCartService shoppingCartService;
@@ -30,24 +30,29 @@ public class ShoppingcartPostController {
 	@Autowired
 	ProductService productService;
 	
-	@RequestMapping(value = "/customer/{customerId}/product/{productId}", method = RequestMethod.POST)
-	public ShoppingCart addProductToCartByProductId(@PathVariable("customerId") Long customerId, @PathVariable("productId") Long productId) {
+	@RequestMapping(value = "/customer/{customerId}/product/{productId}/quantity/{quantity}", method = RequestMethod.POST)
+	public ShoppingCart addProductToCartByProductId(@PathVariable("customerId") Long customerId, @PathVariable("productId") Long productId, @PathVariable("quantity") int quantity) {
 
-		logger.debug("addProductToCartByProductId method called with customerId= "+customerId + " , productId = " + productId);
+		LOG.debug("addProductToCartByProductId method called with customerId= "+customerId + " , productId = " + productId);
 		
 		Product tempProduct = productService.getProductById(productId);
-		System.out.println(tempProduct);
-		ShoppingCart addedCart = shoppingCartService.addProductByCustomerId(tempProduct, customerId);
-		System.out.println(addedCart);
+		LOG.debug(tempProduct.toString());
+		
+		ShoppingCart addedCart = shoppingCartService.addProductByCustomerId(tempProduct, customerId, quantity);
+		LOG.debug("addedCart is : " + addedCart.toString());
+		
 		return addedCart;
 	}
 	
+	/* Don't think this is needed anymore
+	 * 
 	@RequestMapping(value = "/prices", method = RequestMethod.POST)
 	public List<Product> addPricesToCartAndRespond(@RequestBody List<Product> productListWithPrices ) {
 
-		logger.debug("addPricesToCartAndRespond method called with" + productListWithPrices);
+		LOG.debug("addPricesToCartAndRespond method called with" + productListWithPrices);
 		
 		return productListWithPrices;
 	}
+	*/
 	
 }

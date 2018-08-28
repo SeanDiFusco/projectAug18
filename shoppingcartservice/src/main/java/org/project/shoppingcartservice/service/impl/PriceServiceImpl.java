@@ -19,15 +19,15 @@ public class PriceServiceImpl implements PriceService{
 
 	@Override
 	public List<Product> getPricesForCustomerCartList(List<Product> customerCartProductList) {
-		
+		/* used when list request via post not working
 		for(Product product : customerCartProductList) {
 			Float price = getPriceForSingleProduct(product.getProductId());
 			product.setPrice(price);
 		}
 		
-		return customerCartProductList;
+		return customerCartProductList;*/
 		
-		//return priceServiceFeignClient.getPriceForProductList(customerCartProductList);
+		return priceServiceFeignClient.getPriceForProductList(customerCartProductList);
 
 	}
 
